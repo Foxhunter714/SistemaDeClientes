@@ -1,6 +1,7 @@
 package utilidades;
  
 public class Utilidad {
+	// TODO este método podría tener salto de linea, para no tener que agregarlo desde afuera
 	public static void showMessage(String message) {
 		System.out.print(message);
 	}

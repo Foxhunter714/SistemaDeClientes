@@ -1,8 +1,5 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Cliente {
 	private String runCliente;
 	private String nombreCliente;

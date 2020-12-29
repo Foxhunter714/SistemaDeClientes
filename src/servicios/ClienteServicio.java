@@ -9,6 +9,8 @@ import model.Cliente;
 import utilidades.Utilidad;
 
 public class ClienteServicio {
+	// TODO falta indentar el código
+	// eliminar comentarios innecesarios
 	public void listarClientes(List<Cliente> listaClientes) {
 		  
 		if(listaClientes != null) {
@@ -17,8 +19,8 @@ public class ClienteServicio {
 			for (Cliente cliente : listaClientes) {
 				Utilidad.showMessage("");
 				Utilidad.showMessage("Datos del Cliente: \n" );
-				Utilidad.showMessage("\n");
-				Utilidad.showMessage("RUN: " + cliente.getRunCliente()+ "\n");
+				Utilidad.showMessage("\n"); // TODO esto podría ser un método aparte
+				Utilidad.showMessage("RUN: " + cliente.getRunCliente()+ "\n"); //TODO el salto de linea dentro de la utilidad
 				//System.out.print();
 				Utilidad.showMessage("\n");
 				Utilidad.showMessage("Nombre: " + cliente.getNombreCliente()+ "\n"); 
@@ -34,7 +36,7 @@ public class ClienteServicio {
 				Utilidad.showMessage("\n");
 				//System.out.print();
 			}
-			Utilidad.showMessage("---------------------------------\n");
+			Utilidad.showMessage("---------------------------------\n"); // TODO esto podría ser un método en Utilidad
 		} else {
 			Utilidad.showMessage("No se ha podido listar a los clientes, aún no carga datos\n");
 		}
@@ -46,7 +48,7 @@ public class ClienteServicio {
 	}
 	
 	public Cliente agregarCliente() {
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in); // TODO hay varias instancias de scanner pero ninguna se cierra
 		Utilidad.showMessage("-----------------------------Crear Cliente\n");
 		Utilidad.showMessage("Ingresa RUT del Cliente: \n");
 		String runCliente = scanner.nextLine();

@@ -3,6 +3,7 @@ package model;
 public class Categoria {
 	private CategoriaEnum nombreCategoria;
 	
+	//TODO ¿este constructor es utilizado?
 	public Categoria() {} 
 
 	public Categoria(CategoriaEnum nombreCategoria) {
