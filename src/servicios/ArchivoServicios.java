@@ -14,40 +14,42 @@ import java.util.stream.Collectors;
 import model.Cliente;
 import utilidades.Utilidad;
 
-public class ArchivoServicios extends Exportador{
-	
+//TODO los nombres de clases son con minúscula => Ño
+public class ArchivoServicios extends Exportador {
+
 	Scanner scanner = new Scanner(System.in);
-	
+
 	@SuppressWarnings("resource")
-	public List<Cliente> cargarDatos(String fileName){
+	public List<Cliente> cargarDatos(String fileName) {
 		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		Utilidad.showMessage("-------------------------Cargar Datos---------------------\n");
 		Utilidad.showMessage("Ingresa la ruta en donde se encuentra el archivo inventario.csv: \n");
 		String filePath = scanner.nextLine();
 		String file = filePath + "/" + fileName;
-		
+
 		FileReader fr = null;
-		BufferedReader br = null;
-			
+		BufferedReader br = null; 
+
 		try {
 			fr = new FileReader(new File(file));
 			br = new BufferedReader(fr);
-			return br.lines().map(line -> line.split(",")).map(values -> 
-			//Falta cambiar el valor 0 del values por un int
-			new Cliente(values[0], values[1], values[2], values[3], values[4]))
-			.collect(Collectors.toList()); 
-		} catch(Exception error) {
+			return br.lines().map(line -> line.split(",")).map(values ->
+			new Cliente(values[0], values[1], values[2], values[3], values[4])).collect(Collectors.toList());
+		} catch (Exception error) {
 			Utilidad.showMessage("No se pudo cargar el archivo .csv\n");
 		} finally {
 			try {
-				if ( null != fr) {
+				if (null != fr) {
 					fr.close();
+				}
+			} catch (Exception error) {
+				Utilidad.showMessage("No se pudo cerrar el archivo\n");
 			}
-		} catch (Exception error) {
-			Utilidad.showMessage("No se pudo cerrar el archivo\n");
-		} 
-	} 
+		}
 		return null;
-  }	
+	}
+
+	@Override
+	public void exportar(String fileName, List<Cliente> listaClientes) {
+	}
 }
-		

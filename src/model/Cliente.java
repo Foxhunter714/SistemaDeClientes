@@ -1,19 +1,16 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Cliente {
 	private String runCliente;
 	private String nombreCliente;
 	private String apellidoCliente;
 	private String aniosCliente;
 	private String categoriaCliente;
-	
-	//Constructor vacío
-	public Cliente() {}
 
-	//Constructor
+	
+	public Cliente() {
+	}
+
 	public Cliente(String runCliente, String nombreCliente, String apellidoCliente, String aniosCliente,
 			String categoriaCliente) {
 		super();
@@ -23,7 +20,8 @@ public class Cliente {
 		this.aniosCliente = aniosCliente;
 		this.categoriaCliente = categoriaCliente;
 	}
-	//Getter and Setter
+
+	
 	public String getRunCliente() {
 		return runCliente;
 	}
@@ -69,6 +67,5 @@ public class Cliente {
 		return "Cliente [runCliente=" + runCliente + ", nombreCliente=" + nombreCliente + ", apellidoCliente="
 				+ apellidoCliente + ", aniosCliente=" + aniosCliente + ", categoria=" + categoriaCliente + "]";
 	}
-	
-	
+
 }
