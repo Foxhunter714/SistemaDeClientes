@@ -54,4 +54,8 @@ public class ClienteServicio {
 			CategoriaEnum nombreCategoria, List<Cliente> listaClientes) {
 		
 	}
+
+	public List<Cliente> getListaClientes() {
+		return listaClientes;
+	}
 }
