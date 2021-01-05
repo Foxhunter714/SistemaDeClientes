@@ -4,11 +4,11 @@ public class Utilidad {
 	// TODO este método podría tener salto de línea, para no tener que agregarlo
 	// desde afuera
 	public static void showMessagePredefined() {
-		System.out.print("--------------------------------------- \n");
+		System.out.println("---------------------------------------");
 	}
 	
 	public static void showMessage(String message) {
-		System.out.print(message);
+		System.out.println(message);
 	}
 
 	public static void stopAndContinue() {

@@ -11,30 +11,27 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import model.CategoriaEnum;
 import model.Cliente;
 import utilidades.Utilidad;
 
 //TODO los nombres de clases son con minúscula => Ño
-public class ArchivoServicios extends Exportador {
-
+public class ArchivoServicio extends Exportador {
 	Scanner scanner = new Scanner(System.in);
 
-	@SuppressWarnings("resource")
 	public List<Cliente> cargarDatos(String fileName) {
-		List<Cliente> listaClientes = new ArrayList<Cliente>();
-		Utilidad.showMessage("-------------------------Cargar Datos---------------------\n");
-		Utilidad.showMessage("Ingresa la ruta en donde se encuentra el archivo inventario.csv: \n");
 		String filePath = scanner.nextLine();
 		String file = filePath + "/" + fileName;
 
 		FileReader fr = null;
-		BufferedReader br = null; 
+		BufferedReader br = null;
 
 		try {
 			fr = new FileReader(new File(file));
 			br = new BufferedReader(fr);
-			return br.lines().map(line -> line.split(",")).map(values ->
-			new Cliente(values[0], values[1], values[2], values[3], values[4])).collect(Collectors.toList());
+			return br.lines().map(line -> line.split(","))
+					.map(values -> new Cliente(values[0], values[1], values[2], values[3], CategoriaEnum.ACTIVO))
+					.collect(Collectors.toList()); // TODO cambiar
 		} catch (Exception error) {
 			Utilidad.showMessage("No se pudo cargar el archivo .csv\n");
 		} finally {
@@ -43,7 +40,7 @@ public class ArchivoServicios extends Exportador {
 					fr.close();
 				}
 			} catch (Exception error) {
-				Utilidad.showMessage("No se pudo cerrar el archivo\n");
+				Utilidad.showMessage("No se pudo crear el archivo\n");
 			}
 		}
 		return null;
@@ -51,5 +48,11 @@ public class ArchivoServicios extends Exportador {
 
 	@Override
 	public void exportar(String fileName, List<Cliente> listaClientes) {
+		// Una clase que genera 2 instancias de 2 clases distintas llamadas de la misma
+		// forma
+		Exportador exportador = new ExportarCsv();
+		Exportador exportador2 = new ExportarTxt();
+		exportador.exportar(fileName, listaClientes);
+		exportador2.exportar(fileName, listaClientes);
 	}
 }

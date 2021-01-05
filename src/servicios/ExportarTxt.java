@@ -12,13 +12,14 @@ import utilidades.Utilidad;
 
 public class ExportarTxt extends Exportador {
 	Scanner scanner = new Scanner(System.in);
+
 	@Override
-	public void exportar(String fileName, List<Cliente> listaClientes) {		
+	public void exportar(String fileName, List<Cliente> listaClientes) {
 		if (listaClientes == null) {
-			Utilidad.showMessage("La lista está vacía...\n");
+			Utilidad.showMessage("La lista está vacía...");
 		} else {
-			Utilidad.showMessage("-----------------------------Exportar Datos\n");
-			Utilidad.showMessage("Ingresa la ruta a donde quieres exportar los datos: \n");
+			Utilidad.showMessage("Exportar Datos");
+			Utilidad.showMessage("Ingresa la ruta a donde quieres exportar los datos: ");
 			String cvsSeparatorValue = ",";
 			String filePath = scanner.nextLine();
 			String file = filePath + "/" + fileName;
@@ -34,17 +35,17 @@ public class ExportarTxt extends Exportador {
 					pWriter.append(cliente.getRunCliente()).append(cvsSeparatorValue).append(cliente.getNombreCliente())
 							.append(cvsSeparatorValue).append(cliente.getApellidoCliente()).append(cvsSeparatorValue)
 							.append(cliente.getAniosCliente()).append(cvsSeparatorValue)
-							.append(cliente.getCategoriaCliente()).append(System.lineSeparator());
+							.append(cliente.getNombreCategoria().name()).append(System.lineSeparator());
 				});
 				pWriter.close();
-				Utilidad.showMessage("Datos exportados correctamente en formato .txt\n");
+				Utilidad.showMessage("Datos exportados correctamente en formato .txt");
 			} catch (IOException error) {
-				Utilidad.showMessage("El archivo no pudo ser creado en formato .txt\n");
+				Utilidad.showMessage("El archivo no pudo ser creado en formato .txt");
 			} finally {
-				Utilidad.showMessage("----------------------------\n");
+				Utilidad.showMessagePredefined();
 			}
 
 		}
-		
-	} 
+
+	}
 }

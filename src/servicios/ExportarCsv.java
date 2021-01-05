@@ -15,10 +15,10 @@ public class ExportarCsv extends Exportador {
 	@Override
 	public void exportar(String fileName, List<Cliente> listaClientes) {
 		if (listaClientes == null) {
-			Utilidad.showMessage("La lista está vacía...\n");
+			Utilidad.showMessage("La lista está vacía...");
 		} else {
-			Utilidad.showMessage("-----------------------------Exportar Datos\n");
-			Utilidad.showMessage("Ingresa la ruta a donde quieres exportar los datos: \n");
+			Utilidad.showMessage("Exportar Datos");
+			Utilidad.showMessage("Ingresa la ruta a donde quieres exportar los datos: ");
 			String cvsSeparatorValue = ",";
 			String filePath = scanner.nextLine();
 			String file = filePath + "/" + fileName;
@@ -31,17 +31,18 @@ public class ExportarCsv extends Exportador {
 				PrintWriter pWriter = new PrintWriter(new FileWriter(file));
 
 				listaClientes.forEach(cliente -> {
-					pWriter.append(cliente.getRunCliente()).append(cvsSeparatorValue).append(cliente.getNombreCliente())
-							.append(cvsSeparatorValue).append(cliente.getApellidoCliente()).append(cvsSeparatorValue)
+					pWriter.append(cliente.getRunCliente()).append(cvsSeparatorValue)
+							.append(cliente.getNombreCliente()).append(cvsSeparatorValue)
+							.append(cliente.getApellidoCliente()).append(cvsSeparatorValue)
 							.append(cliente.getAniosCliente()).append(cvsSeparatorValue)
-							.append(cliente.getCategoriaCliente()).append(System.lineSeparator());
+							.append(cliente.getNombreCategoria().name()).append(System.lineSeparator());
 				});
 				pWriter.close();
-				Utilidad.showMessage("Datos exportados correctamente en formato .csv\n");
+				Utilidad.showMessage("Datos exportados correctamente en formato .csv");
 			} catch (IOException error) {
-				Utilidad.showMessage("El archivo no pudo ser creado en formato .csv\n");
+				Utilidad.showMessage("El archivo no pudo ser creado en formato .csv");
 			} finally {
-				Utilidad.showMessage("----------------------------\n");
+				Utilidad.showMessagePredefined();
 			}
 
 		}

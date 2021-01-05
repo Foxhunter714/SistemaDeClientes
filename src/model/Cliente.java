@@ -5,20 +5,20 @@ public class Cliente {
 	private String nombreCliente;
 	private String apellidoCliente;
 	private String aniosCliente;
-	private String categoriaCliente;
+	private CategoriaEnum nombreCategoria;
 
 	
 	public Cliente() {
 	}
 
 	public Cliente(String runCliente, String nombreCliente, String apellidoCliente, String aniosCliente,
-			String categoriaCliente) {
+			CategoriaEnum nombreCategoria) {
 		super();
 		this.runCliente = runCliente;
 		this.nombreCliente = nombreCliente;
 		this.apellidoCliente = apellidoCliente;
 		this.aniosCliente = aniosCliente;
-		this.categoriaCliente = categoriaCliente;
+		this.nombreCategoria = nombreCategoria;
 	}
 
 	
@@ -54,18 +54,18 @@ public class Cliente {
 		this.aniosCliente = aniosCliente;
 	}
 
-	public String getCategoriaCliente() {
-		return categoriaCliente;
+	public CategoriaEnum getNombreCategoria() {
+		return nombreCategoria;
 	}
 
-	public void setCategoriaCliente(String categoriaCliente) {
-		this.categoriaCliente = categoriaCliente;
+	public void setNombreCategoria(CategoriaEnum nombreCategoria) {
+		this.nombreCategoria = nombreCategoria;
 	}
 
 	@Override
 	public String toString() {
 		return "Cliente [runCliente=" + runCliente + ", nombreCliente=" + nombreCliente + ", apellidoCliente="
-				+ apellidoCliente + ", aniosCliente=" + aniosCliente + ", categoria=" + categoriaCliente + "]";
+				+ apellidoCliente + ", aniosCliente=" + aniosCliente + ", nombreCategoria=" + nombreCategoria + "]";
 	}
 
 }
