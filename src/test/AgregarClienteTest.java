@@ -9,28 +9,28 @@ import model.CategoriaEnum;
 import model.Cliente;
 import servicios.ClienteServicio;
 
-public class CasosEjemplo {
+public class AgregarClienteTest {
 
 	private ClienteServicio clienteServicio;
 	private Cliente cliente;
 	@Before
-	void setUp() {
+	public void setUp() {
 		clienteServicio = new ClienteServicio();
 		cliente = new Cliente();
 	}
 
 	@Test
-	void crearClienteTest() {
+	public void crearClienteTest() {
 		//Given
 		String runCliente = "18871922-1";
 		String nombreCliente = "Alejandro";
 		String apellidoCliente = "Garcia";
 		String aniosCliente = "23";
 		CategoriaEnum nombreCategoria = CategoriaEnum.ACTIVO;
-		
 		//When
-		cliente = clienteServicio.agregarCliente(runCliente, nombreCliente, apellidoCliente, aniosCliente, nombreCategoria.name());
-		//cliente = clienteServicio.agregarCliente(runCliente, nombreCliente, apellidoCliente, aniosCliente, CategoriaEnum.ACTIVO);
+		
+		clienteServicio.agregarCliente(runCliente, nombreCliente, apellidoCliente, aniosCliente, nombreCategoria);
+		cliente = clienteServicio.getListaClientes().get(0);
 		String a = cliente.getNombreCliente();
 		System.out.print(a);
 

@@ -15,13 +15,14 @@ import model.CategoriaEnum;
 import model.Cliente;
 import utilidades.Utilidad;
 
-//TODO los nombres de clases son con minúscula => Ño
 public class ArchivoServicio extends Exportador {
 	Scanner scanner = new Scanner(System.in);
 
+	@SuppressWarnings("static-access")
 	public List<Cliente> cargarDatos(String fileName) {
+		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		String filePath = scanner.nextLine();
-		String file = filePath + "/" + fileName;
+		String file = filePath + File.separator + fileName;
 
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -29,18 +30,21 @@ public class ArchivoServicio extends Exportador {
 		try {
 			fr = new FileReader(new File(file));
 			br = new BufferedReader(fr);
-			return br.lines().map(line -> line.split(","))
-					.map(values -> new Cliente(values[0], values[1], values[2], values[3], CategoriaEnum.ACTIVO))
-					.collect(Collectors.toList()); // TODO cambiar
+			List<Cliente> l = br.lines().map(line -> line.split(","))
+					.map(values -> new Cliente(values[0], values[1], values[2], values[3], 
+					CategoriaEnum.ACTIVO))
+					.collect(Collectors.toList());
+			Utilidad.showMessage(l.toString());
+			return l;
 		} catch (Exception error) {
-			Utilidad.showMessage("No se pudo cargar el archivo .csv\n");
+			Utilidad.showMessage("No se pudo cargar el archivo .csv");
 		} finally {
 			try {
 				if (null != fr) {
 					fr.close();
 				}
 			} catch (Exception error) {
-				Utilidad.showMessage("No se pudo crear el archivo\n");
+				Utilidad.showMessage("No se pudo crear el archivo");
 			}
 		}
 		return null;
@@ -50,8 +54,8 @@ public class ArchivoServicio extends Exportador {
 	public void exportar(String fileName, List<Cliente> listaClientes) {
 		// Una clase que genera 2 instancias de 2 clases distintas llamadas de la misma
 		// forma
-		Exportador exportador = new ExportarCsv();
-		Exportador exportador2 = new ExportarTxt();
+		Exportador exportador = new ExportadorCsv();
+		Exportador exportador2 = new ExportadorTxt();
 		exportador.exportar(fileName, listaClientes);
 		exportador2.exportar(fileName, listaClientes);
 	}

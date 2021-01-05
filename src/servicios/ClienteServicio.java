@@ -2,6 +2,7 @@ package servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.CategoriaEnum;
 import model.Cliente;
 import utilidades.Utilidad;
@@ -16,7 +17,6 @@ public class ClienteServicio {
 		listaClientes = new ArrayList<>();
 	}
 
-	@SuppressWarnings("null")
 	public void listarClientes() {
 		//TODO que no se puedan agregar valores nulos al agregar usuario
 			
@@ -35,6 +35,7 @@ public class ClienteServicio {
 			 else {
 				 Utilidad.showMessage("No se ha podido listar a los clientes, aún no carga datos");	
 			 } 
+			Utilidad.stopAndContinue();
 		 }
 	
 
@@ -57,5 +58,9 @@ public class ClienteServicio {
 
 	public List<Cliente> getListaClientes() {
 		return listaClientes;
+	}
+
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
 	}
 }

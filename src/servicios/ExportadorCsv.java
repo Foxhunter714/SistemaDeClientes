@@ -10,7 +10,7 @@ import java.util.Scanner;
 import model.Cliente;
 import utilidades.Utilidad;
 
-public class ExportarCsv extends Exportador {
+public class ExportadorCsv extends Exportador {
 	Scanner scanner = new Scanner(System.in);
 	@Override
 	public void exportar(String fileName, List<Cliente> listaClientes) {

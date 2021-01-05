@@ -1,15 +1,15 @@
 package view;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.CategoriaEnum;
 import model.Cliente;
 import servicios.ArchivoServicio;
 import servicios.ClienteServicio;
-import servicios.ExportarCsv;
-import servicios.ExportarTxt;
+import servicios.ExportadorCsv;
+import servicios.ExportadorTxt;
 import utilidades.Utilidad;
 /*
  [X]Falta por implementar el método salir en el menú.
@@ -26,8 +26,8 @@ public class Menu {
 
 	ClienteServicio clienteServicio = new ClienteServicio();
 	ArchivoServicio archivoServicio = new ArchivoServicio();
-	ExportarCsv exportarcsv = new ExportarCsv();
-	ExportarTxt exportartxt = new ExportarTxt();
+	ExportadorCsv exportarcsv = new ExportadorCsv();
+	ExportadorTxt exportartxt = new ExportadorTxt();
 	String fileName = "clientes";
 	String fileName1 = "DBClientes.csv";
 	Scanner scanner = new Scanner(System.in);
@@ -50,8 +50,6 @@ public class Menu {
 		for (int i = 0; i < largo; i++) {
 			System.out.println(i + 1 + " " + opcionesMenu.get(i));
 		}
-		// TODO ¿es necesario este scanner? Menu ya tiene un scanner
-		Scanner scanner = new Scanner(System.in);
 		int opcion = 0;
 		Utilidad.showMessage("Ingrese una opción:");
 		try {
@@ -79,7 +77,7 @@ public class Menu {
 				agregarCliente();
 				break;
 			case 3:
-				editarCliente(null);
+				editarCliente();
 				break;
 			case 4:
 				cargarDatos();
@@ -102,6 +100,7 @@ public class Menu {
 
 	private void agregarCliente() {
 		Utilidad.showMessage("Crear Cliente");
+		scanner.nextLine(); //http://zparacha.com/java-scanner-class-not-reading-correctly-after-nextint-or-nextdouble-method-call 
 		Utilidad.showMessage("Ingresa RUT del Cliente:");
 		String runCliente = scanner.nextLine();
 		Utilidad.showMessage("Ingresa Nombre del Cliente:");
@@ -116,82 +115,21 @@ public class Menu {
 		Utilidad.stopAndContinue();
 	}
 
-	private void editarCliente(List<Cliente> listaClientes) {
+	private void editarCliente() {
 		System.out.print("Seleccione que desea hacer: ");
 		Utilidad.showMessage("1.-Cambiar el estado del Cliente");
 		Utilidad.showMessage("2.-Editar los datos del Cliente");
 		int opcionEdicion = scanner.nextInt();
-<<<<<<< HEAD
+		scanner.nextLine();
 		Utilidad.showMessage("Ingrese RUN del cliente:");
 		String run1 = scanner.nextLine();
-		for (Cliente cliente : listaClientes) {
-			if (opcionEdicion == 1) {
-				if (cliente.getRunCliente().equals(run1)) {
-					Utilidad.showMessage("El estado actual es: " + cliente.getNombreCategoria());
-					Utilidad.showMessagePredefined();
-					Utilidad.showMessage("1.-Si desea cambiar el estado");
-					Utilidad.showMessage("2.-Si desea mantener el estado");
-					int opcionActividad = scanner.nextInt();
-					if (opcionActividad == 1) {
-						cliente.setNombreCategoria(CategoriaEnum.INACTIVO);
-					} else if (opcionActividad == 2) {
-						Utilidad.stopAndContinue();
-					} else {
-						Utilidad.showMessage("Te equivocaste de opción");
-					}
-				}
-			} else if (opcionEdicion == 2) {
-				Utilidad.showMessage("Ingresa el RUN del Cliente a buscar:");
-				String run2 = scanner.nextLine();
-				if (cliente.getRunCliente().equals(run2)) {
-					Utilidad.showMessage("1.-El RUN del Cliente es: " + cliente.getRunCliente());
-					Utilidad.showMessage("2.-El Nombre del Cliente: " + cliente.getNombreCliente());
-					Utilidad.showMessage("3.-El Apellido del Cliente: " + cliente.getApellidoCliente());
-					Utilidad.showMessage("4.-Años como Cliente: " + cliente.getAniosCliente());
-					Utilidad.showMessagePredefined();
-					Utilidad.showMessage("Ingrese la opción a editar");
-					int opcionCliente = scanner.nextInt();
-					switch (opcionCliente) {
-					case 1:
-						Utilidad.showMessage("Ingrese nuevo RUN:");
-						String runCliente = scanner.nextLine();
-						cliente.setRunCliente(runCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 2:
-						Utilidad.showMessage("Ingrese nuevo nombre:");
-						String nombreCliente = scanner.nextLine();
-						cliente.setNombreCliente(nombreCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 3:
-						Utilidad.showMessage("Ingrese nuevo apellido");
-						String apellidoCliente = scanner.nextLine();
-						cliente.setApellidoCliente(apellidoCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 4:
-						Utilidad.showMessage("Ingrese la cantidad nueva de años:");
-						String aniosCliente = scanner.nextLine();
-						cliente.setAniosCliente(aniosCliente);
-						Utilidad.stopAndContinue();
-						break;
-					default:
-						Utilidad.showMessage("Usted marco una opción incorrecta");
-						Utilidad.stopAndContinue();
-					}
-=======
-
-		Utilidad.showMessage("Ingrese RUN del cliente:");
-		String run1 = scanner.nextLine();
-
+		List<Cliente> listaClientes = clienteServicio.getListaClientes();
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getRunCliente().equals(run1)) {
 				if (opcionEdicion == 1) {
 					actualizarEstadoCliente(cliente);
 				} else if (opcionEdicion == 2) {
 					actualizarDatosClientes(cliente);
->>>>>>> cdafb9531953c5fc963fd96ba3608230629b5951
 				}
 			}
 		}
@@ -205,11 +143,12 @@ public class Menu {
 		Utilidad.showMessagePredefined();
 		Utilidad.showMessage("Ingrese la opción a editar");
 		int opcionCliente = scanner.nextInt();
+		scanner.nextLine();
 		switch (opcionCliente) {
 		case 1:
 			Utilidad.showMessage("Ingrese nuevo RUN:");
-			String runCliente = scanner.nextLine();
-			cliente.setRunCliente(runCliente);
+			String runCliente1 = scanner.nextLine();
+			cliente.setRunCliente(runCliente1);
 			break;
 		case 2:
 			Utilidad.showMessage("Ingrese nuevo nombre:");
@@ -249,10 +188,11 @@ public class Menu {
 
 	private void cargarDatos() {
 		Utilidad.showMessage("Cargar Datos");
-		Utilidad.showMessage("Ingresa la ruta en donde se encuentra el archivo inventario.csv:");
+		Utilidad.showMessage("Ingresa la ruta en donde se encuentra el archivo DBClientes.csv:");
 
 		List<Cliente> listaClientes = archivoServicio.cargarDatos(fileName1);
 		if (listaClientes != null && !listaClientes.isEmpty()) {
+			clienteServicio.setListaClientes(listaClientes);
 			Utilidad.showMessage("Datos cargados correctamente");
 			Utilidad.showMessagePredefined();
 			Utilidad.stopAndContinue();
@@ -260,15 +200,7 @@ public class Menu {
 			Utilidad.showMessage("No se pudo cargar los datos del archivo " + fileName1);
 		}
 	}
-
-	private void salirSistema() {
-		Utilidad.showMessage("Abandonando el sistema de inventario...");
-		Utilidad.timeToWait();
-		Utilidad.showMessage("Acaba de salir del sistema");
-		Utilidad.stopAndContinue();
-		System.exit(0);
-	}
-
+	
 	private void exportarDatos() {
 		Utilidad.showMessage("Seleccione el formato a exportar:");
 		Utilidad.showMessage("1.-Formato '.csv'");
@@ -289,4 +221,13 @@ public class Menu {
 			Utilidad.showMessage("Número de opción ingresado incorrectamente.");
 		}
 	}
+	
+	private void salirSistema() {
+		Utilidad.showMessage("Abandonando el sistema de clientes...");
+		Utilidad.timeToWait();
+		Utilidad.showMessage("Acaba de salir del sistema");
+		Utilidad.stopAndContinue();
+		System.exit(0);
+	}
+
 }

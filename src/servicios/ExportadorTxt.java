@@ -10,7 +10,7 @@ import java.util.Scanner;
 import model.Cliente;
 import utilidades.Utilidad;
 
-public class ExportarTxt extends Exportador {
+public class ExportadorTxt extends Exportador {
 	Scanner scanner = new Scanner(System.in);
 
 	@Override
