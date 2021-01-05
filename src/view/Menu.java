@@ -120,10 +120,10 @@ public class Menu {
 		Utilidad.showMessage("1.-Cambiar el estado del Cliente");
 		Utilidad.showMessage("2.-Editar los datos del Cliente");
 		int opcionEdicion = scanner.nextInt();
+		Utilidad.showMessage("Ingrese RUN del cliente:");
+		String run1 = scanner.nextLine();
 		for (Cliente cliente : listaClientes) {
 			if (opcionEdicion == 1) {
-				Utilidad.showMessage("Ingrese RUN del cliente:");
-				String run1 = scanner.nextLine();
 				if (cliente.getRunCliente().equals(run1)) {
 					Utilidad.showMessage("El estado actual es: " + cliente.getNombreCategoria());
 					Utilidad.showMessagePredefined();
