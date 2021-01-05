@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import model.CategoriaEnum;
 import model.Cliente;
 import servicios.ArchivoServicio;
@@ -33,12 +34,12 @@ public class Menu {
 
 	public void iniciarMenu() {
 		List<String> opcionesMenu = new ArrayList<String>();
-		opcionesMenu.add("Listar Cliente\n"); // 1
-		opcionesMenu.add("Agregar Cliente\n"); // 2
-		opcionesMenu.add("Editar Cliente\n"); // 3
-		opcionesMenu.add("Cargar Datos\n"); // 4
-		opcionesMenu.add("Exportar Datos\n"); // 5
-		opcionesMenu.add("Salir\n"); // 6
+		opcionesMenu.add("Listar Cliente");
+		opcionesMenu.add("Agregar Cliente");
+		opcionesMenu.add("Editar Cliente");
+		opcionesMenu.add("Cargar Datos");
+		opcionesMenu.add("Exportar Datos");
+		opcionesMenu.add("Salir");
 		Menu menu = new Menu();
 		menu.seleccionOpcion(opcionesMenu);
 	}
@@ -47,8 +48,9 @@ public class Menu {
 		List<String> opcionesMenu = pOpcionesMenu;
 		int largo = opcionesMenu.size();
 		for (int i = 0; i < largo; i++) {
-			System.out.print(i + 1 + " " + opcionesMenu.get(i));
+			System.out.println(i + 1 + " " + opcionesMenu.get(i));
 		}
+		// TODO ¿es necesario este scanner? Menu ya tiene un scanner
 		Scanner scanner = new Scanner(System.in);
 		int opcion = 0;
 		Utilidad.showMessage("Ingrese una opción:");
@@ -59,10 +61,8 @@ public class Menu {
 		}
 		if (opcion < 1 || opcion >= largo + 1) {
 			Utilidad.showMessage("Selección no permitida");
-		} else {
-			return opcion;
 		}
-		return 0;
+		return opcion;
 	}
 
 	public void seleccionOpcion(List<String> pOpcionesMenu) {
@@ -101,7 +101,6 @@ public class Menu {
 	}
 
 	private void agregarCliente() {
-
 		Utilidad.showMessage("Crear Cliente");
 		Utilidad.showMessage("Ingresa RUT del Cliente:");
 		String runCliente = scanner.nextLine();
@@ -111,6 +110,8 @@ public class Menu {
 		String apellidoCliente = scanner.nextLine();
 		Utilidad.showMessage("Ingresa años como Cliente:");
 		String aniosCliente = scanner.nextLine();
+
+		// Por defecto, el nuevo cliente está siempre activo
 		clienteServicio.agregarCliente(runCliente, nombreCliente, apellidoCliente, aniosCliente, CategoriaEnum.ACTIVO);
 		Utilidad.stopAndContinue();
 	}
@@ -188,13 +189,15 @@ public class Menu {
 	private void cargarDatos() {
 		Utilidad.showMessage("Cargar Datos");
 		Utilidad.showMessage("Ingresa la ruta en donde se encuentra el archivo inventario.csv:");
-		listaClientes = archivoServicio.cargarDatos(fileName1);
-		if (!listaClientes.isEmpty()) {
+
+		List<Cliente> listaClientes = archivoServicio.cargarDatos(fileName1);
+		if (listaClientes != null && !listaClientes.isEmpty()) {
 			Utilidad.showMessage("Datos cargados correctamente");
 			Utilidad.showMessagePredefined();
 			Utilidad.stopAndContinue();
+		} else {
+			Utilidad.showMessage("No se pudo cargar los datos del archivo " + fileName1);
 		}
-
 	}
 
 	private void salirSistema() {
@@ -210,6 +213,7 @@ public class Menu {
 		Utilidad.showMessage("1.-Formato '.csv'");
 		Utilidad.showMessage("2.- Formato '.txt'");
 
+		List<Cliente> listaClientes = clienteServicio.getListaClientes();
 		int opcion = scanner.nextInt();
 		switch (opcion) {
 		case 1:
@@ -221,7 +225,7 @@ public class Menu {
 			Utilidad.stopAndContinue();
 			break;
 		case 3:
-			Utilidad.showMessage("Número de opción ingresado incorrectamente");
+			Utilidad.showMessage("Número de opción ingresado incorrectamente.");
 		}
 	}
 }
