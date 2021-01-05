@@ -121,68 +121,68 @@ public class Menu {
 		Utilidad.showMessage("1.-Cambiar el estado del Cliente");
 		Utilidad.showMessage("2.-Editar los datos del Cliente");
 		int opcionEdicion = scanner.nextInt();
+
+		Utilidad.showMessage("Ingrese RUN del cliente:");
+		String run1 = scanner.nextLine();
+
 		for (Cliente cliente : listaClientes) {
-			if (opcionEdicion == 1) {
-				Utilidad.showMessage("Ingrese RUN del cliente:");
-				String run1 = scanner.nextLine();
-				if (cliente.getRunCliente().equals(run1)) {
-					Utilidad.showMessage("El estado actual es: " + cliente.getNombreCategoria());
-					Utilidad.showMessagePredefined();
-					Utilidad.showMessage("1.-Si desea cambiar el estado");
-					Utilidad.showMessage("2.-Si desea mantener el estado");
-					int opcionActividad = scanner.nextInt();
-					if (opcionActividad == 1) {
-						cliente.setNombreCategoria(CategoriaEnum.INACTIVO);
-					} else if (opcionActividad == 2) {
-						Utilidad.stopAndContinue();
-					} else {
-						Utilidad.showMessage("Te equivocaste de opción");
-					}
+			if (cliente.getRunCliente().equals(run1)) {
+				if (opcionEdicion == 1) {
+					actualizarEstadoCliente(cliente);
+				} else if (opcionEdicion == 2) {
+					actualizarDatosClientes(cliente);
 				}
-			} else if (opcionEdicion == 2) {
-				Utilidad.showMessage("Ingresa el RUN del Cliente a buscar:");
-				String run2 = scanner.nextLine();
-				if (cliente.getRunCliente().equals(run2)) {
-					Utilidad.showMessage("1.-El RUN del Cliente es: " + cliente.getRunCliente());
-					Utilidad.showMessage("2.-El Nombre del Cliente: " + cliente.getNombreCliente());
-					Utilidad.showMessage("3.-El Apellido del Cliente: " + cliente.getApellidoCliente());
-					Utilidad.showMessage("4.-Años como Cliente: " + cliente.getAniosCliente());
-					Utilidad.showMessagePredefined();
-					Utilidad.showMessage("Ingrese la opción a editar");
-					int opcionCliente = scanner.nextInt();
-					switch (opcionCliente) {
-					case 1:
-						Utilidad.showMessage("Ingrese nuevo RUN:");
-						String runCliente = scanner.nextLine();
-						cliente.setRunCliente(runCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 2:
-						Utilidad.showMessage("Ingrese nuevo nombre:");
-						String nombreCliente = scanner.nextLine();
-						cliente.setNombreCliente(nombreCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 3:
-						Utilidad.showMessage("Ingrese nuevo apellido");
-						String apellidoCliente = scanner.nextLine();
-						cliente.setApellidoCliente(apellidoCliente);
-						Utilidad.stopAndContinue();
-						break;
-					case 4:
-						Utilidad.showMessage("Ingrese la cantidad nueva de años:");
-						String aniosCliente = scanner.nextLine();
-						cliente.setAniosCliente(aniosCliente);
-						Utilidad.stopAndContinue();
-						break;
-					default:
-						Utilidad.showMessage("Usted marco una opción incorrecta");
-						Utilidad.stopAndContinue();
-					}
-				}
-			} else {
-				Utilidad.showMessage("");
 			}
+		}
+	}
+
+	private void actualizarDatosClientes(Cliente cliente) {
+		Utilidad.showMessage("1.-El RUN del Cliente es: " + cliente.getRunCliente());
+		Utilidad.showMessage("2.-El Nombre del Cliente: " + cliente.getNombreCliente());
+		Utilidad.showMessage("3.-El Apellido del Cliente: " + cliente.getApellidoCliente());
+		Utilidad.showMessage("4.-Años como Cliente: " + cliente.getAniosCliente());
+		Utilidad.showMessagePredefined();
+		Utilidad.showMessage("Ingrese la opción a editar");
+		int opcionCliente = scanner.nextInt();
+		switch (opcionCliente) {
+		case 1:
+			Utilidad.showMessage("Ingrese nuevo RUN:");
+			String runCliente = scanner.nextLine();
+			cliente.setRunCliente(runCliente);
+			break;
+		case 2:
+			Utilidad.showMessage("Ingrese nuevo nombre:");
+			String nombreCliente = scanner.nextLine();
+			cliente.setNombreCliente(nombreCliente);
+			break;
+		case 3:
+			Utilidad.showMessage("Ingrese nuevo apellido");
+			String apellidoCliente = scanner.nextLine();
+			cliente.setApellidoCliente(apellidoCliente);
+			break;
+		case 4:
+			Utilidad.showMessage("Ingrese la cantidad nueva de años:");
+			String aniosCliente = scanner.nextLine();
+			cliente.setAniosCliente(aniosCliente);
+			break;
+		default:
+			Utilidad.showMessage("Usted marco una opción incorrecta");
+		}
+		Utilidad.stopAndContinue();
+	}
+
+	private void actualizarEstadoCliente(Cliente cliente) {
+		Utilidad.showMessage("El estado actual es: " + cliente.getNombreCategoria());
+		Utilidad.showMessagePredefined();
+		Utilidad.showMessage("1.-Si desea cambiar el estado");
+		Utilidad.showMessage("2.-Si desea mantener el estado");
+		int opcionActividad = scanner.nextInt();
+		if (opcionActividad == 1) {
+			cliente.setNombreCategoria(CategoriaEnum.INACTIVO);
+		} else if (opcionActividad == 2) {
+			Utilidad.stopAndContinue();
+		} else {
+			Utilidad.showMessage("Opción no valida");
 		}
 	}
 
