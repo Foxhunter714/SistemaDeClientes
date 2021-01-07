@@ -3,9 +3,6 @@ package servicios;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,8 +28,7 @@ public class ArchivoServicio extends Exportador {
 			fr = new FileReader(new File(file));
 			br = new BufferedReader(fr);
 			List<Cliente> l = br.lines().map(line -> line.split(","))
-					.map(values -> new Cliente(values[0], values[1], values[2], values[3], 
-					CategoriaEnum.ACTIVO))
+					.map(values -> new Cliente(values[0], values[1], values[2], values[3], CategoriaEnum.ACTIVO))
 					.collect(Collectors.toList());
 			Utilidad.showMessage(l.toString());
 			return l;
@@ -52,8 +48,6 @@ public class ArchivoServicio extends Exportador {
 
 	@Override
 	public void exportar(String fileName, List<Cliente> listaClientes) {
-		// Una clase que genera 2 instancias de 2 clases distintas llamadas de la misma
-		// forma
 		Exportador exportador = new ExportadorCsv();
 		Exportador exportador2 = new ExportadorTxt();
 		exportador.exportar(fileName, listaClientes);

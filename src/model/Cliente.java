@@ -7,7 +7,6 @@ public class Cliente {
 	private String aniosCliente;
 	private CategoriaEnum nombreCategoria;
 
-	
 	public Cliente() {
 	}
 
@@ -21,7 +20,6 @@ public class Cliente {
 		this.nombreCategoria = nombreCategoria;
 	}
 
-	
 	public String getRunCliente() {
 		return runCliente;
 	}

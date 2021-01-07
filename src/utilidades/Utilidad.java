@@ -1,12 +1,11 @@
 package utilidades;
 
 public class Utilidad {
-	// TODO este método podría tener salto de línea, para no tener que agregarlo
-	// desde afuera
+
 	public static void showMessagePredefined() {
 		System.out.println("---------------------------------------");
 	}
-	
+
 	public static void showMessage(String message) {
 		System.out.println(message);
 	}

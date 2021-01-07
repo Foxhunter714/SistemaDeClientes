@@ -19,7 +19,7 @@ public class ExportadorTxt extends Exportador {
 			Utilidad.showMessage("La lista está vacía...");
 		} else {
 			Utilidad.showMessage("Exportar Datos");
-			Utilidad.showMessage("Ingresa la ruta a donde quieres exportar los datos: ");
+			Utilidad.showMessage("Ingresa la ruta en donde desea exportar el archivo clientes.txt: ");
 			String cvsSeparatorValue = ",";
 			String filePath = scanner.nextLine();
 			String file = filePath + "/" + fileName;
@@ -38,7 +38,7 @@ public class ExportadorTxt extends Exportador {
 							.append(cliente.getNombreCategoria().name()).append(System.lineSeparator());
 				});
 				pWriter.close();
-				Utilidad.showMessage("Datos exportados correctamente en formato .txt");
+				Utilidad.showMessage("Datos de clientes exportados correctamente en formato .txt");
 			} catch (IOException error) {
 				Utilidad.showMessage("El archivo no pudo ser creado en formato .txt");
 			} finally {

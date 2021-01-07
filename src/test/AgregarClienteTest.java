@@ -13,6 +13,7 @@ public class AgregarClienteTest {
 
 	private ClienteServicio clienteServicio;
 	private Cliente cliente;
+
 	@Before
 	public void setUp() {
 		clienteServicio = new ClienteServicio();
@@ -21,20 +22,20 @@ public class AgregarClienteTest {
 
 	@Test
 	public void crearClienteTest() {
-		//Given
+		// Given
 		String runCliente = "18871922-1";
 		String nombreCliente = "Alejandro";
 		String apellidoCliente = "Garcia";
 		String aniosCliente = "23";
 		CategoriaEnum nombreCategoria = CategoriaEnum.ACTIVO;
-		//When
-		
+		// When
+
 		clienteServicio.agregarCliente(runCliente, nombreCliente, apellidoCliente, aniosCliente, nombreCategoria);
 		cliente = clienteServicio.getListaClientes().get(0);
 		String a = cliente.getNombreCliente();
 		System.out.print(a);
 
-		//Then
+		// Then
 		assertEquals(a, "Alejandro");
 	}
 
